@@ -1,0 +1,34 @@
+{
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.16.0",
+    "signale": "^1.4.0"
+  },
+  "name": "password_manager_backend",
+  "version": "1.0.0",
+  "description": "Backend services for password manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mansi-Narang/Lockr.git"
+  },
+  "type": "module",
+  "keywords": [
+    "Password",
+    "manager",
+    "vault",
+    "mansi",
+    "locker",
+    "lockr"
+  ],
+  "author": "Mansi Narang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Mansi-Narang/Lockr/issues"
+  },
+  "homepage": "https://github.com/Mansi-Narang/Lockr#readme"
+}
