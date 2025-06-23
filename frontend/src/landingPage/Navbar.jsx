@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Shield, Menu, X} from 'lucide-react';
+import { NavLink } from "react-router";
 
 function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -12,9 +13,11 @@ function Navbar() {
               <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-2 rounded-lg">
                 <Shield className="w-6 h-6 text-white" />
               </div>
+              <NavLink to="/">
               <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 VaultGuard
               </span>
+              </NavLink>
             </div>
 
             {/* Desktop Navigation */}
@@ -35,12 +38,16 @@ function Navbar() {
 
             {/* Desktop Auth Buttons */}
             <div className="hidden md:flex items-center space-x-4">
+              <NavLink to= "/login">
               <button className="text-gray-600 hover:text-gray-900 transition-colors">
-                Sign In
+                Log In
               </button>
+              </NavLink>
+              <NavLink to="/signup">
               <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200">
-                Get Started
+                Sign Up
               </button>
+              </NavLink>
             </div>
 
             {/* Mobile menu button */}
@@ -71,12 +78,16 @@ function Navbar() {
                   About
                 </a>
                 <div className="pt-4 pb-2 space-y-2">
+                  <NavLink to = "/login" >
                   <button className="w-full text-left px-3 py-2 text-gray-600 hover:text-gray-900 transition-colors">
-                    Sign In
-                  </button>
-                  <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-2 rounded-lg hover:shadow-lg transition-all duration-200">
-                    Get Started
-                  </button>
+                    Log In
+                    </button>
+                  </NavLink>
+                  <NavLink to="/signup">
+                  <button className= "w-full text-left px-3 py-2 text-gray-600 hover:text-gray-900 transition-colors">
+                    Sign Up
+                    </button>
+                  </NavLink>
                 </div>
               </div>
             </div>
