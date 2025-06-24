@@ -32,7 +32,7 @@ connectMongo()
 app.post('/signup', errorHandler(async(req, res) => {
     const {username, email, password, confirmPassword} = req.body;
     const {error, value} = signupValidator.validate(req.body);
-    if(error) throw new Error("Schema Validation Failed!");
+    if(error) throw new Error("Enter your credentials correctly!");
     const salt = await bcrypt.genSalt();
     const hash = await bcrypt.hash(password, salt);
     await userModel.insertOne({ username, email, password : hash });

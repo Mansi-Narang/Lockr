@@ -1,8 +1,7 @@
 import React, {  useState } from 'react';
 import { Shield, Eye, EyeOff, Mail, Lock, User, ArrowLeft, Check } from 'lucide-react';
 import {NavLink} from 'react-router'
-import axiosInstance from '../../utils/axiosInstance';
-import toast, { Toaster } from 'react-hot-toast';
+import signUpApi from '../../API/signUpApi';
 import { useNavigate } from 'react-router';
 
 function SignUp() {
@@ -56,27 +55,7 @@ function SignUp() {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    const response = await axiosInstance.post('/signup', {
-      username : formData.firstName + " " + formData.lastName,
-      email : formData.email,
-      password : formData.password,
-      confirmPassword : formData.confirmPassword
-    });
-    if(response.data.error){
-     toast.error(response.data.error, {
-        duration: 4000,
-        position: 'top-center'
-     })
-    }else{
-      toast.success(response.data.message, {
-        duration : 4000
-      })
-      navigate('/login', {
-        state : {
-          showToast : true
-        }
-      });
-    }
+    signUpApi(formData) ? navigate('/login') : navigate('/signup');
   }
 
   return (

@@ -1,4 +1,5 @@
 import {  ChevronRight } from 'lucide-react';
+import { Link } from 'react-router';
 
 function Hero() {
     return ( 
@@ -17,13 +18,17 @@ function Hero() {
               seamless synchronization across all devices, and an intuitive interface designed for everyone.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link to = "/signup">
               <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:shadow-xl hover:scale-105 transition-all duration-200 flex items-center">
                 Sign Up
                 <ChevronRight className="w-5 h-5 ml-2" />
               </button>
+              </Link>
+              <Link to="/login">
               <button className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl text-lg font-semibold hover:border-gray-400 hover:bg-gray-50 transition-all duration-200">
                 Log In
               </button>
+              </Link>
             </div>
           </div>
         </div>
