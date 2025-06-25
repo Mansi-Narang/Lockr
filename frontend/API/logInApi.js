@@ -2,7 +2,7 @@ import axiosInstance from "../utils/axiosInstance";
 import toast from "react-hot-toast";
 
 async function LogInApi(formData) {
-    const response = await axiosInstance.post('/login', formData);
+    const response = await axiosInstance.post('/login', formData, {withCredentials: true});
     if(response.data.error){
         toast.error(response.data.error, {
         duration: 4000,

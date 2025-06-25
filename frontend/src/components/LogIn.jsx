@@ -31,7 +31,7 @@ function LogIn() {
 
     try {
       await new Promise(resolve => setTimeout(resolve, 1500)); 
-      await LogInApi(formData) ? navigate('/') : navigate('/signup');
+      await LogInApi(formData) ? navigate('/') : navigate('/login');
     } catch(e) {
         console.log(e);
       setError('Invalid email or password. Please try again.');

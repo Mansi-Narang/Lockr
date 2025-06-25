@@ -7,13 +7,19 @@ import {signupValidator, loginValidator} from './SchemaValidator/User.js';
 import bcrypt from 'bcryptjs'
 import errorHandler from './utils/errorHandler.js'
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import jwt from 'jsonwebtoken';
 
 const app = express();
 
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin : 'http://localhost:5173',
+    credentials : true
+}));
+app.use(cookieParser());
 app.use(express.urlencoded({ extended : true }));
 
 app.listen(port, ()=>{
@@ -30,12 +36,25 @@ connectMongo()
 
 
 app.post('/signup', errorHandler(async(req, res) => {
-    const {username, email, password, confirmPassword} = req.body;
     const {error, value} = signupValidator.validate(req.body);
     if(error) throw new Error("Enter your credentials correctly!");
+    const {username, email, password, confirmPassword} = req.body;
     const salt = await bcrypt.genSalt();
     const hash = await bcrypt.hash(password, salt);
-    await userModel.insertOne({ username, email, password : hash });
+    const newUser = new userModel({ username, email, password : hash });
+    await newUser.save();
+
+    const id = newUser._id;
+    const token = jwt.sign(id, process.env.JWT_KEY, {
+        algorithm: 'HS512',
+        expiresIn: '5d'
+    })
+    res.cookie('user', token, {
+        httpOnly : true,
+        expires : new Date(Date.now() + (7*24*60*60*1000)),
+        sameSite : 'Lax',
+        secure : process.env.NODE_ENV === "production"
+    });
     return res.json({message : "User registered"});
 }))
 
@@ -45,8 +64,19 @@ app.post('/login', errorHandler(async(req, res) =>{
     const {error, value} = loginValidator.validate(req.body);
     if(error) throw new Error("Credentials wrong");
     const user = await userModel.findOne({email});
-    if(!user) throw new Error("No user found");
+    if(!user) throw new Error("No user found");    
     const confirm = await bcrypt.compare(password, user.password);
-    if(!confirm) throw new Error("Password is Wrong!")
+    if(!confirm) throw new Error("Password is Wrong!");
+    const id = user._id;
+    const token = jwt.sign({"id" : id}, process.env.JWT_KEY, {
+        algorithm: 'HS512',
+        expiresIn: '5d'
+    })
+    res.cookie('user',  token, {
+        httpOnly : true,
+        expires : new Date(Date.now() + (7*24*60*60*1000)),
+        sameSite : 'Lax',
+        secure : process.env.NODE_ENV === "production"
+    });
     return res.json({message: "User logged in"});
 }))

@@ -7,7 +7,7 @@ async function signUpApi(formData) {
       email : formData.email,
       password : formData.password,
       confirmPassword : formData.confirmPassword
-    });
+    }, {withCredentials : true});
     if(response.data.error){
      toast.error(response.data.error, {
         duration: 4000,
