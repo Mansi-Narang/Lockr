@@ -5,12 +5,14 @@ import Signup from './components/Signup'
 import LogIn from './components/LogIn'
 import {BrowserRouter, Routes, Route} from "react-router"
 import { Toaster } from 'react-hot-toast'
+import { AuthProvider } from './landingPage/context/authContext'
 
 function App() {
 
   return (
     <>
       <BrowserRouter>
+      <AuthProvider>
       <Navbar/>
       <Toaster toastOptions={{
         style : {
@@ -29,6 +31,7 @@ function App() {
         <Route path='login' element = {<LogIn />} />
       </Routes>
       <Footer/>
+      </AuthProvider>
       </BrowserRouter>
     </>
   )

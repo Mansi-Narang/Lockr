@@ -45,7 +45,7 @@ app.post('/signup', errorHandler(async(req, res) => {
     await newUser.save();
 
     const id = newUser._id;
-    const token = jwt.sign(id, process.env.JWT_KEY, {
+    const token = jwt.sign({id, email : newUser.email, username: newUser.username}, process.env.JWT_KEY, {
         algorithm: 'HS512',
         expiresIn: '5d'
     })
@@ -67,8 +67,7 @@ app.post('/login', errorHandler(async(req, res) =>{
     if(!user) throw new Error("No user found");    
     const confirm = await bcrypt.compare(password, user.password);
     if(!confirm) throw new Error("Password is Wrong!");
-    const id = user._id;
-    const token = jwt.sign({"id" : id}, process.env.JWT_KEY, {
+    const token = jwt.sign({id : user._id, email : user.email, username: user.username}, process.env.JWT_KEY, {
         algorithm: 'HS512',
         expiresIn: '5d'
     })
@@ -79,4 +78,14 @@ app.post('/login', errorHandler(async(req, res) =>{
         secure : process.env.NODE_ENV === "production"
     });
     return res.json({message: "User logged in"});
+}))
+
+app.get('/user', errorHandler((req, res) => {
+    const token = req.cookies.user;
+    if(!token) return res.json({user : null});
+
+    jwt.verify(token, process.env.JWT_KEY, function(err, decoded){
+        if(err) throw new Error("No user found");
+        return res.json({user: decoded});
+    });
 }))
