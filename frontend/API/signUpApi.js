@@ -13,12 +13,13 @@ async function signUpApi(formData) {
         duration: 4000,
         position: 'top-center'
      })
-     return false;
+     return {success: false};
     }else{
       toast.success(response.data.message, {
         duration : 4000
       })
-      return true;
+      console.log(response.data);
+      return {success : true, user: response.data.user};
     }
 }
 

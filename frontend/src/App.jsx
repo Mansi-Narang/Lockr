@@ -6,6 +6,7 @@ import LogIn from './components/LogIn'
 import {BrowserRouter, Routes, Route} from "react-router"
 import { Toaster } from 'react-hot-toast'
 import { AuthProvider } from './landingPage/context/authContext'
+import ProtectedRoute from './landingPage/context/ProtectedRoute'
 
 function App() {
 
@@ -26,7 +27,10 @@ function App() {
         }
       }}></Toaster>
       <Routes>
-        <Route index element = {<Home/>} />
+        <Route index element = 
+        {<ProtectedRoute>
+            <Home/>
+        </ProtectedRoute>} />
         <Route path='/signup' element = {<Signup/>} />
         <Route path='login' element = {<LogIn />} />
       </Routes>

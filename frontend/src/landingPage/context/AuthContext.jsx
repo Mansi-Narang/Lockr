@@ -27,7 +27,7 @@ function AuthProvider({children}){
         fetchUser();
     }, [])
 
-    return <AuthContext.Provider value={{user, loading}}>{children}</AuthContext.Provider>
+    return <AuthContext.Provider value={{user, setUser, loading}}>{children}</AuthContext.Provider>
 }
 
 export { useAuth, AuthProvider };

@@ -8,12 +8,12 @@ async function LogInApi(formData) {
         duration: 4000,
         position: 'top-center'
      })
-     return false;
+     return {success: false};
     }else{
         toast.success(response.data.message, {
-            duration : 4000  
+            duration : 4000
         })
-        return true;
+        return {success : true, user : response.data.user};
     }
 }
 

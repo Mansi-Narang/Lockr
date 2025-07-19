@@ -1,10 +1,12 @@
-import React, {  useState } from 'react';
-import { Shield, Eye, EyeOff, Mail, Lock, User, ArrowLeft, Check } from 'lucide-react';
+import  { useState } from 'react';
+import { Shield, Eye, EyeOff, Mail, Lock, User, Check } from 'lucide-react';
 import {NavLink} from 'react-router'
 import signUpApi from '../../API/signUpApi';
 import { useNavigate } from 'react-router';
+import { useAuth } from '../landingPage/context/authContext';
 
 function SignUp() {
+  const {setUser} = useAuth();
   let navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -55,7 +57,12 @@ function SignUp() {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    signUpApi(formData) ? navigate('/login') : navigate('/signup');
+    const res = await signUpApi(formData);
+    if(res.success == false) navigate('/signup');
+    else{
+      setUser(res.user);
+      navigate('/login');
+    }
   }
 
   return (
