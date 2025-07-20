@@ -9,6 +9,10 @@ import errorHandler from './utils/errorHandler.js'
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import jwt from 'jsonwebtoken';
+import helmet from 'helmet';
+import Vault from './Schemas/vaultSchema.js';
+import vaultValidator from './middleware/vaultValidator.js';
+import isLoggedIn from './middleware/isLoggedIn.js';
 
 const app = express();
 
@@ -21,6 +25,8 @@ app.use(cors({
 }));
 app.use(cookieParser());
 app.use(express.urlencoded({ extended : true }));
+app.use(helmet());
+
 
 app.listen(port, ()=>{
     logger.success(`Server is listening to port ${port} successfully !`);
@@ -35,7 +41,7 @@ connectMongo()
 })
 
 
-app.post('/signup', errorHandler(async(req, res) => {
+app.post('/api/signup', errorHandler(async(req, res) => {
     const {error, value} = signupValidator.validate(req.body);
     if(error) throw new Error("Enter your credentials correctly!");
     const {username, email, password} = req.body;
@@ -60,7 +66,7 @@ app.post('/signup', errorHandler(async(req, res) => {
 }))
 
 
-app.post('/login', errorHandler(async(req, res) =>{
+app.post('/api/login', errorHandler(async(req, res) =>{
     const {email, password} = req.body;
     const {error, value} = loginValidator.validate(req.body);
     if(error) throw new Error("Credentials wrong");
@@ -82,7 +88,7 @@ app.post('/login', errorHandler(async(req, res) =>{
     return res.json({user, message: "User logged in"});
 }))
 
-app.get('/user', errorHandler((req, res) => {
+app.get('/api/me', errorHandler((req, res) => {
     const token = req.cookies.user;
     if(!token) return res.json({user : null});
 
@@ -92,11 +98,59 @@ app.get('/user', errorHandler((req, res) => {
     });
 }))
 
-app.post('/logout', errorHandler((req, res) => {
-    const token = req.cookies.user;
-    if(!token) throw new Error('Invalid Session');
-    const check = jwt.verify(token, process.env.JWT_KEY);
-    if(!check) throw new Error('Not a valid user!');
+
+app.post('/api/logout', isLoggedIn, errorHandler((req, res) => {
     res.clearCookie('user');
     return res.json({message : "Logged out successfully!"});
 }));
+
+
+
+app.get('/api/vault', isLoggedIn, errorHandler(async(req, res) => {
+    const vaults = await Vault.find({ userId : res.locals.userid });
+    if(vaults.length === 0){
+        throw new Error('No vaults has been added yet!');
+    }
+    return res.json({message : vaults});
+}))
+
+
+app.post('/api/vault', isLoggedIn, vaultValidator, errorHandler(async(req, res) => {
+    const newVault = req.body;
+    const vault = new Vault(newVault);
+    await vault.save();
+    return res.json({
+        message : 'Vault saved securely!'
+    })
+}))
+
+
+app.get('/api/vault/:id', isLoggedIn, errorHandler(async(req, res) => {
+    const { id } = req.params;
+    if(!id) throw new Error('No parameter Id provided!');
+    const vault = await Vault.findById(id);
+    if(!vault) throw new Error('No such vault found!');
+    return res.json({ message : vault });
+}))
+
+
+app.put('/api/vault/:id', isLoggedIn, vaultValidator, errorHandler(async(req, res) => {
+    const { id } = req.params;
+    if(!id) throw new Error('No parameter Id provided');
+    const updatedVault = req.body;
+    const vault = await Vault.findByIdAndUpdate(id, updatedVault);
+    if(!vault) throw new Error('No such vault existing');
+    return res.json({message : 'Vault updated successfully!'});
+}))
+
+
+app.delete('/api/vault/:id', isLoggedIn, errorHandler(async(req, res) => {
+    const { id } = req.params;
+    if(!id) throw new Error('No parameter Id provided');
+    const vault = await Vault.findByIdAndDelete(id);
+    if(!vault) throw new Error('No such vault existing');
+    return res.json({
+        message : 'Vault deleted successfully!'
+    })
+}))
+

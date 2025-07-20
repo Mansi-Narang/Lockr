@@ -2,7 +2,7 @@ import axiosInstance from "../utils/axiosInstance";
 import toast from "react-hot-toast";
 
 async function signUpApi(formData) {
-    const response = await axiosInstance.post('/signup', {
+    const response = await axiosInstance.post('/api/signup', {
       username : formData.firstName + " " + formData.lastName,
       email : formData.email,
       password : formData.password,

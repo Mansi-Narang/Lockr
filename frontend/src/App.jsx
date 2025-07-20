@@ -5,8 +5,8 @@ import Signup from './components/Signup'
 import LogIn from './components/LogIn'
 import {BrowserRouter, Routes, Route} from "react-router"
 import { Toaster } from 'react-hot-toast'
-import { AuthProvider } from './landingPage/context/authContext'
-import ProtectedRoute from './landingPage/context/ProtectedRoute'
+import { AuthProvider } from './context/AuthContext'
+import ProtectedRoute from './context/ProtectedRoute'
 
 function App() {
 

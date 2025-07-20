@@ -3,7 +3,7 @@ import { Shield, Eye, EyeOff, Mail, Lock, User, Check } from 'lucide-react';
 import {NavLink} from 'react-router'
 import signUpApi from '../../API/signUpApi';
 import { useNavigate } from 'react-router';
-import { useAuth } from '../landingPage/context/authContext';
+import { useAuth } from '../context/AuthContext';
 
 function SignUp() {
   const {setUser} = useAuth();

@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
 import { Shield, Eye, EyeOff, Mail, Lock, ArrowLeft, AlertCircle } from 'lucide-react';
 import LogInApi from '../../API/logInApi';
-import toast from 'react-hot-toast';
-import { useAuth } from '../landingPage/context/authContext';
+import { useAuth } from '../context/AuthContext'
 
 function LogIn() {
   const {setUser} = useAuth();
-  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',

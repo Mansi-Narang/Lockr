@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import axiosInstance from "../../../utils/axiosInstance";
+import axiosInstance from "../../utils/axiosInstance";
 import toast from "react-hot-toast";
 
 const AuthContext = createContext();
@@ -13,7 +13,7 @@ function AuthProvider({children}){
     useEffect(() => {
         const fetchUser = async() => {
             try{
-                const response = await axiosInstance.get('/user', {withCredentials : true});
+                const response = await axiosInstance.get('/api/me', {withCredentials : true});
                 if(response.data.error) throw new Error(response.data.error); 
                 setUser(response.data.user);
             }
