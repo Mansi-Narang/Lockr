@@ -24,8 +24,8 @@ const vaultSchema = new Schema({
             time : String,
             ipAddres : String
         }
-    }
-})
+    },
+}, {timestamps : true})
 
 const Vault = new model('Vault', vaultSchema);
 

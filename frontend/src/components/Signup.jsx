@@ -58,7 +58,7 @@ function SignUp() {
   const handleSubmit = async(e) => {
     e.preventDefault();
     const res = await signUpApi(formData);
-    if(res.success == false) navigate('/signup');
+    if(res.success == false) navigate('/dashboard');
     else{
       setUser(res.user);
       navigate('/login');

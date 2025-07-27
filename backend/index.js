@@ -26,6 +26,10 @@ app.use(cors({
 app.use(cookieParser());
 app.use(express.urlencoded({ extended : true }));
 app.use(helmet());
+app.use((req, res, next) => {
+    res.setHeader("Content-Type", "application/json");
+    next();
+});
 
 
 app.listen(port, ()=>{
@@ -108,7 +112,7 @@ app.post('/api/logout', isLoggedIn, errorHandler((req, res) => {
 
 app.get('/api/vault', isLoggedIn, errorHandler(async(req, res) => {
     const vaults = await Vault.find({ userId : res.locals.userid });
-    if(vaults.length === 0){
+    if(!vaults){
         throw new Error('No vaults has been added yet!');
     }
     return res.json({message : vaults});

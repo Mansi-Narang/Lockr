@@ -4,9 +4,11 @@ import Navbar from './landingPage/navbar'
 import Signup from './components/Signup'
 import LogIn from './components/LogIn'
 import {BrowserRouter, Routes, Route} from "react-router"
-import { Toaster } from 'react-hot-toast'
 import { AuthProvider } from './context/AuthContext'
 import ProtectedRoute from './context/ProtectedRoute'
+import Hero from './dashboard/Hero'
+import PublicLayout from './layouts/PublicLayout'
+import DashboardLayout from './layouts/DashboardLayout'
 
 function App() {
 
@@ -14,27 +16,19 @@ function App() {
     <>
       <BrowserRouter>
       <AuthProvider>
-      <Navbar/>
-      <Toaster toastOptions={{
-        style : {
-          background: '#f0f4ff',
-          color: '#312e81',
-          border: '1px solid #e0e0e0',
-          padding: '12px 16px',
-          fontWeight: '500',
-          fontSize: '14px',
-          boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)',
-        }
-      }}></Toaster>
       <Routes>
-        <Route index element = 
-        {<ProtectedRoute>
-            <Home/>
-        </ProtectedRoute>} />
-        <Route path='/signup' element = {<Signup/>} />
-        <Route path='login' element = {<LogIn />} />
+        <Route element = {<PublicLayout/>}>
+            <Route index element = 
+            {<ProtectedRoute>
+                <Home/>
+            </ProtectedRoute>} />
+            <Route path='/signup' element = {<Signup/>} />
+            <Route path='login' element = {<LogIn />} />
+        </Route>
+        <Route element = {<ProtectedRoute><DashboardLayout/></ProtectedRoute>}>
+          <Route path='/dashboard' element = {<Hero/>} />
+        </Route>
       </Routes>
-      <Footer/>
       </AuthProvider>
       </BrowserRouter>
     </>

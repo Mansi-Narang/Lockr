@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Shield, Eye, EyeOff, Mail, Lock, ArrowLeft, AlertCircle } from 'lucide-react';
 import LogInApi from '../../API/logInApi';
 import { useAuth } from '../context/AuthContext'
+import { useNavigate } from 'react-router';
 
 function LogIn() {
+  const navigate = useNavigate();
   const {setUser} = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -37,6 +39,7 @@ function LogIn() {
       }
       else{
         setUser(res.user);
+        navigate('/dashboard');
       }
     } catch(e) {
         console.log(e);
