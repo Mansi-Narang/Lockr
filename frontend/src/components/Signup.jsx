@@ -58,10 +58,10 @@ function SignUp() {
   const handleSubmit = async(e) => {
     e.preventDefault();
     const res = await signUpApi(formData);
-    if(res.success == false) navigate('/dashboard');
+    if(res.success == false) navigate('/signup');
     else{
       setUser(res.user);
-      navigate('/login');
+      navigate('/dashboard');
     }
   }
 

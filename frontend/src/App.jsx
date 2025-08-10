@@ -1,6 +1,4 @@
-import Footer from './landingPage/Footer'
 import Home from './landingPage/Home'
-import Navbar from './landingPage/navbar'
 import Signup from './components/Signup'
 import LogIn from './components/LogIn'
 import {BrowserRouter, Routes, Route} from "react-router"
@@ -18,10 +16,7 @@ function App() {
       <AuthProvider>
       <Routes>
         <Route element = {<PublicLayout/>}>
-            <Route index element = 
-            {<ProtectedRoute>
-                <Home/>
-            </ProtectedRoute>} />
+            <Route index element = {<Home/>} />
             <Route path='/signup' element = {<Signup/>} />
             <Route path='login' element = {<LogIn />} />
         </Route>
