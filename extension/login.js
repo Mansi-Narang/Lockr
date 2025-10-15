@@ -5,7 +5,7 @@ const error = document.getElementById('errorMsg');
 
 submit.addEventListener("click", async (e)=>{
     e.preventDefault();
-    const res = await fetch('http://localhost:3000/api/login', {
+    const res = await fetch('https://lockr-1ftl.onrender.com//api/login', {
         method: "POST",
         headers: {
             "Content-Type":"application/json"

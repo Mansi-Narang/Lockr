@@ -24,7 +24,7 @@ document.querySelectorAll("form").forEach(form => {
                     
 
                     if (confirm(`Do you want to save credentials for ${window.location.hostname}?`)) {
-                        fetch("http://localhost:3000/api/save", {
+                        fetch("https://lockr-1ftl.onrender.com//api/save", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json"
