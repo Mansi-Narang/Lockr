@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Plus, Shield, Filter, Grid, List } from 'lucide-react';
-import VaultCard from './VaultCard';
-import AddVaultModal from './AddVaultModal';
-import {getVaultsApi, deleteVaultsApi, addVaultApi} from '../../API/VaultsApi';
+import VaultCard from './VaultCard.jsx';
+import AddVaultModal from './AddVaultModal.jsx';
+import {getVaultsApi, deleteVaultsApi, addVaultApi} from '../../API/VaultsApi.js';
 
 
 const Vaults = () => {

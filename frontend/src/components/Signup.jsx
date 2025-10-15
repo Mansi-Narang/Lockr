@@ -1,9 +1,9 @@
 import  { useState } from 'react';
 import { Shield, Eye, EyeOff, Mail, Lock, User, Check } from 'lucide-react';
 import {NavLink} from 'react-router'
-import signUpApi from '../../API/signUpApi';
+import signUpApi from '../../API/signUpApi.js';
 import { useNavigate } from 'react-router';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext.jsx';
 
 function SignUp() {
   const {setUser} = useAuth();

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, Edit3, Trash2, Globe, User, Calendar, MapPin } from 'lucide-react';
 import CryptoJS from 'crypto-js';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext.jsx';
 
 const VaultCard = ({ vault, onEdit, onDelete, onView }) => {
   const {user} = useAuth();

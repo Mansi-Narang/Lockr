@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Shield, Menu, X} from 'lucide-react';
 import { NavLink } from "react-router";
-import { logOutApi } from "../../API/logOutApi";
-import { useAuth } from "../context/AuthContext";
+import { logOutApi } from "../../API/logOutApi.js";
+import { useAuth } from "../context/AuthContext.jsx";
 
 function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

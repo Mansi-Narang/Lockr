@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { X, Globe, User, Lock, Plus, Eye, EyeOff } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext.jsx';
 import cryptoJs from 'crypto-js';
 
 const AddVaultModal = ({ isOpen, onClose, onAdd }) => {

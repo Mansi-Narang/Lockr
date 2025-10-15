@@ -1,4 +1,4 @@
-import DashboardNavbar from "../dashboard/Navbar";
+import DashboardNavbar from "../dashboard/Navbar.jsx";
 import { Outlet } from "react-router";
 import { Toaster } from 'react-hot-toast'
 

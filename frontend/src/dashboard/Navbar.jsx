@@ -5,8 +5,8 @@ import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useState } from 'react';
 import { Search, Plus, Shield, Filter, Grid, List } from 'lucide-react';
-import AddVaultModal from './AddVaultModal';
-import { addVaultApi } from '../../API/VaultsApi';
+import AddVaultModal from './AddVaultModal.jsx';
+import { addVaultApi } from '../../API/VaultsApi.js';
 
 
 export default function DashboardNavbar() {

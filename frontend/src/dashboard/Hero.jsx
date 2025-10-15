@@ -1,5 +1,4 @@
-import DashboardNavbar from "./Navbar";
-import Vaults from "./Vaults";
+import Vaults from "./Vaults.jsx";
 
 function Hero() {
     return ( 

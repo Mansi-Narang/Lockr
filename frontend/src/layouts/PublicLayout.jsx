@@ -1,5 +1,5 @@
-import Footer from "../landingPage/Footer";
-import Navbar from "../landingPage/navbar";
+import Footer from "../landingPage/Footer.jsx";
+import Navbar from "../landingPage/navbar.jsx";
 import { Toaster } from 'react-hot-toast';
 import { Outlet } from "react-router";
 

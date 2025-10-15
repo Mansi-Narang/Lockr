@@ -1,6 +1,6 @@
 
-import Hero from './Hero';
-import Features from './Features';
+import Hero from './Hero.jsx';
+import Features from './Features.jsx';
 
 
 function Home() {
