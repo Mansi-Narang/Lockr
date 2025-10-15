@@ -2,5 +2,17 @@
     "manifest_version" : 3,
     "name" : "Lockr",
     "version" : "1.0.0", 
-
+    "description" : "A one platform for all your passwords - secure, encrypted and saved in your Lockr!",
+    "host_permissions":["<all_urls>"],
+    "permissions" : ["cookies", "tabs", "activeTab", "scripting"],
+    "background":{
+        "service_worker" : "service.js"
+    },
+    "content_scripts" : [
+        {
+            "matches" : ["<all_urls>"],
+            "js" : ["content.js"]
+        }
+    ],
+    "options_page" : "login.html"
 }

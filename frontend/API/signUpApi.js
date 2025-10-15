@@ -18,7 +18,6 @@ async function signUpApi(formData) {
       toast.success(response.data.message, {
         duration : 4000
       })
-      console.log(response.data);
       return {success : true, user: response.data.user};
     }
 }

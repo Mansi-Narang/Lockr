@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lockr Login</title>
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+
+  <div class="container">
+    <div class="card">
+      <h1 class="title">🔒 Lockr</h1>
+
+      <form id="loginForm" class="form">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="Enter your email" required />
+        </div>
+
+        <div class="form-group">
+          <label>Master Password</label>
+          <input type="password" id="masterPassword" placeholder="Enter your password" required />
+        </div>
+        
+        <button type="submit" id="submit">Login</button>
+      </form>
+
+      <p id="errorMsg" class="error hidden">
+        Incorrect email or password. Try again.
+      </p>
+
+      <p class="signup">
+        Not signed up yet? Still storing passwords in your head!
+        <a href="https://your-lockr-website.com" target="_blank">Create your Lockr Account</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="login.js" defer></script>
+</body>
+</html>

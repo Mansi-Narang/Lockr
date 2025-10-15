@@ -18,7 +18,7 @@ function App() {
         <Route element = {<PublicLayout/>}>
             <Route index element = {<Home/>} />
             <Route path='/signup' element = {<Signup/>} />
-            <Route path='login' element = {<LogIn />} />
+            <Route path='/login' element = {<LogIn />} />
         </Route>
         <Route element = {<ProtectedRoute><DashboardLayout/></ProtectedRoute>}>
           <Route path='/dashboard' element = {<Hero/>} />

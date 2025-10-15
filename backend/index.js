@@ -63,7 +63,6 @@ app.post('/api/signup', errorHandler(async(req, res) => {
     res.cookie('user', token, {
         httpOnly : true,
         expires : new Date(Date.now() + (7*24*60*60*1000)),
-        sameSite : 'Lax',
         secure : process.env.NODE_ENV === "production"
     });
     return res.json({ user, message : "User registered"});
@@ -86,7 +85,6 @@ app.post('/api/login', errorHandler(async(req, res) =>{
     res.cookie('user',  token, {
         httpOnly : true,
         expires : new Date(Date.now() + (7*24*60*60*1000)),
-        sameSite : 'Lax',
         secure : process.env.NODE_ENV === "production"
     });
     return res.json({user, message: "User logged in"});
@@ -158,3 +156,10 @@ app.delete('/api/vault/:id', isLoggedIn, errorHandler(async(req, res) => {
     })
 }))
 
+app.post('/api/save', isLoggedIn, vaultValidator, errorHandler(async(req, res) => {
+    const data = req.body();
+    console.log(data);
+    const vault = new Vault(data);
+    await vault.save();
+    
+}))
