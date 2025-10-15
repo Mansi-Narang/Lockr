@@ -20,7 +20,7 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cors({
-    origin : 'https://lockr-chi.vercel.app/',
+    origin : 'https://lockr-chi.vercel.app',
     credentials : true
 }));
 app.use(cookieParser());
