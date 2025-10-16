@@ -51,7 +51,7 @@ const Vaults = () => {
     setVaults(prev => [newVault, ...prev]);
   };
 
-  const filteredVaults = vaults && vaults
+  const filteredVaults = vaults && vaults.length && vaults
     .filter(vault => {
       const searchLower = searchTerm.toLowerCase();
       return (
@@ -127,7 +127,7 @@ const Vaults = () => {
           </div>
         </div>
 
-        {vaults.length === 0 ? (
+        {!vaults?.length ? (
           <div className="text-center py-12">
             <Shield className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-lg font-medium text-gray-900 mb-2">
@@ -154,7 +154,7 @@ const Vaults = () => {
             ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' 
             : 'space-y-4'
           }>
-            {filteredVaults.map((vault) => (
+            {filteredVaults?.map((vault) => (
               <VaultCard
                 key={vault._id}
                 vault={vault}
