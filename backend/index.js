@@ -63,7 +63,8 @@ app.post('/api/signup', errorHandler(async(req, res) => {
     res.cookie('user', token, {
         httpOnly : true,
         expires : new Date(Date.now() + (7*24*60*60*1000)),
-        secure : process.env.NODE_ENV === "production"
+        secure : process.env.NODE_ENV === "production",
+        sameSite: 'lax'
     });
     return res.json({ user, message : "User registered"});
 }))
@@ -85,7 +86,8 @@ app.post('/api/login', errorHandler(async(req, res) =>{
     res.cookie('user',  token, {
         httpOnly : true,
         expires : new Date(Date.now() + (7*24*60*60*1000)),
-        secure : process.env.NODE_ENV === "production"
+        secure : process.env.NODE_ENV === "production",
+        sameSite: 'lax'
     });
     return res.json({user, message: "User logged in"});
 }))
